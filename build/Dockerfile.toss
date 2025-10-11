@@ -1,0 +1,36 @@
+# CUDA 11.8 + cuDNN + 컴파일러 포함된 NVIDIA 이미지
+FROM nvidia/cuda:11.8.0-cudnn8-devel-ubuntu22.04
+
+# 시스템 필수 패키지 설치
+RUN apt-get update && apt-get install -y \
+    python3.10 python3-pip python3.10-venv git curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Python 3.10을 기본 python으로 설정
+RUN ln -sf /usr/bin/python3.10 /usr/bin/python && \
+    python -m pip install --upgrade pip==23.2.1
+
+# 작업 디렉토리 설정
+WORKDIR /workspace
+
+# NVIDIA 전용 PyPI를 추가해서 RAPIDS 계열 설치
+RUN pip install \
+    cupy-cuda11x==13.6.0 \
+    cudf-cu11==23.08.0 \
+    dask-cudf-cu11==23.08.0 \
+    nvtabular==23.08.0 \
+    merlin-core==23.08.0 \
+    merlin-dataloader==23.08.0 \
+    --extra-index-url=https://pypi.nvidia.com
+
+# requirements.txt 복사
+COPY toss-requirements.txt .
+
+# 일반 Python 패키지 설치
+RUN pip install --use-deprecated=legacy-resolver --no-cache-dir -r toss-requirements.txt
+
+# JupyterLab 포트 개방
+EXPOSE 8888
+
+# 기본 실행 명령
+CMD ["jupyter", "lab", "--ip=0.0.0.0", "--allow-root", "--no-browser"]

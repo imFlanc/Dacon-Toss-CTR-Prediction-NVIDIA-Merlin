@@ -1,0 +1,32 @@
+# Python Core
+numpy==1.24.3
+pandas==1.5.3
+scikit-learn==1.7.1
+psutil==5.9.1
+pyarrow==12.0.1
+dask==2023.9.2
+xgboost==3.0.5
+
+# 시각화 및 기타
+matplotlib==3.7.2
+seaborn==0.13.0
+tqdm==4.66.1
+
+# Jupyter Environment
+jupyter==1.0.0
+jupyterlab==4.0.9
+ipywidgets==8.1.1
+
+# Utilities
+tqdm==4.66.1
+fastparquet==2023.10.1
+
+# Additional Dependencies
+protobuf==4.25.1
+fsspec==2023.10.0
+distributed==2023.10.0
+
+# ⚠️ RAPIDS 계열은 Dockerfile에서 설치
+# nvtabular==23.08.0
+# cudf==23.08.0
+# cupy==13.6.0
