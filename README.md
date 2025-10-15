@@ -2,13 +2,10 @@
 
 본 프로젝트에서는 GPU 가속 전처리(NVTabular)와 **NVIDIA Merlin + RAPIDS** 생태계 기반으로 대규모 **CTR 예측**을 수행합니다.  
 NVIDIA RTX A6000 Workstation 환경에서 전체 데이터(10.7M) 5fold-CV(stratifiedKfold) 학습에 약 2분 가량이 소요됩니다 (30sec/folds).  
-(https://developer.nvidia.com/merlin)
+- NVIDIA Merlin (official): https://developer.nvidia.com/merlin
 
-학습에는 **XGBoost 모델**을 사용하였고,  
-positive/negative 클래스 불균형을 보정하기 위해 간단한 class weighted **이진 로그 손실(Binary Log Loss)** 을 사용합니다:  
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/ba9692c7-fc1f-409f-be00-31f0de60c9a8" width="192" height="128" alt="weighted loss formula" />
-</p>
+학습에는 **XGBoost** 모델에, 
+positive/negative 클래스 불균형을 보정하기 위한 class weighted **이진 로그 손실(Binary Log Loss)** 을 사용합니다.  
 
 ---
 
