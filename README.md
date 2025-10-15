@@ -1,11 +1,14 @@
 # 📢 CTR Prediction with NVIDIA Merlin & XGBoost
 
-본 프로젝트에서는 GPU 가속 전처리(NVTabular)와 **NVIDIA Merlin + RAPIDS** 생태계 기반으로 대규모 **CTR 예측**을 수행합니다.  
-NVIDIA RTX A6000 Workstation 환경에서 전체 데이터(10.7M) 5fold-CV(stratifiedKfold) 학습에 약 2분 가량이 소요됩니다 (30sec/folds).  
-- NVIDIA Merlin (official): https://developer.nvidia.com/merlin
+본 프로젝트에서는 GPU 가속 전처리 도구인 **NVTabular**와,  
+**NVIDIA Merlin + RAPIDS 생태계**를 활용해 대규모 **CTR 예측(Click-Through Rate Prediction)** 을 수행합니다.  
 
-학습에는 **XGBoost** 모델에, 
-positive/negative 클래스 불균형을 보정하기 위한 class weighted **이진 로그 손실(Binary Log Loss)** 을 사용합니다.  
+NVIDIA RTX A6000 워크스테이션 환경에서 전체 데이터셋(10.7M)을 대상으로  
+Stratified 5-Fold Cross-Validation을 수행할 경우, fold당 약 30초, 전체 학습에 약 2분이 소요됩니다.  
+- NVIDIA Merlin 공식 문서: https://developer.nvidia.com/merlin
+
+학습에는 **XGBoost** 모델을 사용하며,  
+positive/negative 클래스 불균형을 보정하기 위한 **클래스 가중치 이진 로그 손실 (class-weighted binary log loss)** 을 적용합니다.
 
 ---
 
