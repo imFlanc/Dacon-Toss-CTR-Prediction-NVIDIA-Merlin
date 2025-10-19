@@ -18,10 +18,7 @@ jupyterlab==4.0.9
 ipywidgets==8.1.1
 
 # Utilities
-tqdm==4.66.1
 fastparquet==2023.10.1
-
-# Additional Dependencies
 protobuf==4.25.1
 fsspec==2023.10.0
 distributed==2023.10.0
