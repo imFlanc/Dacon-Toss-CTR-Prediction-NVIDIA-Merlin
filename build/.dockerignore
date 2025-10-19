@@ -1,0 +1,11 @@
+# Toss-Dacon/.dockerignore 파일 생성
+.parquet
+*.parquet
+__pycache__/
+.ipynb_checkpoints/
+*.csv
+*.log
+output/
+data/
+.Trash-0
+v1
