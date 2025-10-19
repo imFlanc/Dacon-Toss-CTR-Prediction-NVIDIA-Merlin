@@ -7,8 +7,12 @@ NVIDIA RTX A6000 워크스테이션 환경에서 전체 데이터셋(10.7M)을 �
 Stratified 5-Fold Cross-Validation을 수행할 경우, fold당 약 30초, 전체 학습에 약 2분이 소요됩니다.  
 - NVIDIA Merlin 공식 문서: https://developer.nvidia.com/merlin
 
-학습에는 **XGBoost** 모델을 사용하며,  
-positive/negative 클래스 불균형을 보정하기 위한 **클래스 가중치 이진 로그 손실 (class-weighted binary log loss)** 을 적용합니다.
+학습에는 **XGBoost GPU predictor** 를 사용하며,  
+positive/negative 클래스 불균형을 보정하기 위해 **클래스 가중치 이진 로그 손실 (class-weighted binary log loss)** 을 적용합니다.
+
+추론은 **DMatrix 기반 GPU predictor**를 통해 수행되며, 테스트 데이터셋(1.5M)에 대해 약 140초가 소요됩니다.  
+
+학습 및 추론 과정은 GPU 메모리 사용 효율을 고려하여 NVTabular의 스트리밍 기반 파이프라인으로 구성되어 있습니다.  
 
 ---
 
@@ -17,7 +21,9 @@ positive/negative 클래스 불균형을 보정하기 위한 **클래스 가중�
 - `train.ipynb` : 데이터 로딩, 전처리, 학습 전체 파이프라인 
 - `inference.ipynb` : 추론 전체 파이프라인 
 - `Dockerfile` : CUDA 11.8 기반 Merlin + RAPIDS 실행 환경 
-- `requirements.txt` : Python Core + ML/Visualization + XGBoost 패키지 목록 
+- `requirements.txt` : Python Core + ML/Visualization + XGBoost 패키지 목록
+- `to_oonx.ipynb` : **프레임워크 독립적 배포(IR)** 형태의 모델 추론 파이프라인 구축용 모델 형식 변환  
+*(ONNXRuntime 및 TensorRT 변환 테스트용)*
 
 ---
 
