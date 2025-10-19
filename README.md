@@ -36,19 +36,23 @@ positive/negative 클래스 불균형을 보정하기 위해 **클래스 가중�
 ---
 
 ## 🚀 실행 환경
-
-### Docker
-```bash
-docker run --gpus all -it --ipc=host -p 8888:8888 \
+### Docker image
+```
+FROM nvidia/cuda:11.8.0-cudnn8-devel-ubuntu22.04  
+```
+### Build
+```
+cd ~/Toss-Dacon/build
+docker build -t toss-merlin-env -f Dockerfile.toss .
+```
+### Run
+```
+docker run --gpus all -it --ipc=host --network host \
   -v ~/Toss-Dacon:/workspace \
   --name toss-container \
   toss-merlin-env \
   jupyter lab --ip=0.0.0.0 --port=8888 --allow-root --NotebookApp.token=''
 ```  
-### Dockerfile (Base Image)
-```
-FROM nvidia/cuda:11.8.0-cudnn8-devel-ubuntu22.04  
-```
 
 ---
 ### 📌 Acknowledgement  
