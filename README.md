@@ -10,11 +10,12 @@ Stratified 5-Fold Cross-Validation을 수행할 경우, fold당 약 30초, 전�
 학습에는 **XGBoost GPU predictor** 를 사용하며,  
 positive/negative 클래스 불균형을 보정하기 위해 **클래스 가중치 이진 로그 손실 (class-weighted binary log loss)** 을 적용합니다.
 
-추론은 **DMatrix 기반 GPU predictor**를 통해 수행되며, 테스트 데이터셋(1.5M)에 대해 약 140초가 소요됩니다.  
-
+추론에는 **DMatrix 기반 GPU predictor**를 통해 수행되며, 테스트 데이터셋(1.5M)에 대해 약 140초가 소요됩니다.  
+<p align="center">
+  <img src="CTR_Prediction_Pipeline.svg" width="100%" alt="CTR Prediction Pipeline"/>
+</p>
+<p align="center"><em>Fig.1. GPU-based End-to-End CTR Prediction Pipeline</em></p>
 학습 및 추론 과정은 GPU 메모리 사용 효율을 고려하여 NVTabular의 스트리밍 기반 파이프라인으로 구성되어 있습니다.  
-
----
 
 ## 📁 포함 파일
 
@@ -25,7 +26,6 @@ positive/negative 클래스 불균형을 보정하기 위해 **클래스 가중�
 - `to_oonx.ipynb` : **프레임워크 독립적 배포(IR)** 형태의 모델 추론 파이프라인 구축용 모델 형식 변환  
 *(ONNXRuntime 및 TensorRT 변환 테스트용)*
 
----
 
 ## 📊 데이터 요약
 
@@ -33,7 +33,6 @@ positive/negative 클래스 불균형을 보정하기 위해 **클래스 가중�
 - Test: 1,527,298 rows
 - Feature: 119 cols (anonymized)
 
----
 
 ## 🚀 실행 환경
 ### Docker image
@@ -54,7 +53,7 @@ docker run --gpus all -it --ipc=host --network host \
   jupyter lab --ip=0.0.0.0 --port=8888 --allow-root --NotebookApp.token=''
 ```  
 
----
+
 ### 📌 Acknowledgement  
 Parts of the training and inference code are derived from community-shared solutions in the  [Dacon CTR Prediction Competition](https://dacon.io/competitions/official/236575/overview/description).  
 We have modified the code to suit our custom hardware and runtime environment, including support for NVIDIA Merlin and RAPIDS-based GPU pipelines.
